@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Kufam&family=Scheherazade+New&display=swap');
+
 .App {
   text-align: center;
+  background-color:#FFF2E6;
+  overflow-x : hidden;
+  
+
 }
 
 .App-logo {
