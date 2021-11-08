@@ -6,7 +6,16 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { CardHeader, CardMedia, Pagination, Skeleton} from "@mui/material";
+import { CardHeader, CardMedia, Skeleton, Button} from "@mui/material";
+import usePagination from '@mui/material/usePagination';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Pagination from '../Pagination';
+import SearchComponent from "../SearchComponent";
+
+
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
@@ -16,13 +25,24 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
+import { createBreakpoints } from "@mui/system";
 
 
 
 let theme = createTheme();
-  theme = responsiveFontSizes(theme);
-  
+    theme = responsiveFontSizes(theme);
+    const breakpoints = createBreakpoints({})
 
+
+  const List = styled('ul')({
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+    display: 'flex',
+  });
+
+  
+  
 
 const useStyles = makeStyles(() => ({
   paginator: {
@@ -83,14 +103,21 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
+const testing = {
+  [breakpoints.up('md')] :{ value: true },
+  [breakpoints.between('xs, sm')] :{ value : false }
+}
+
+
 export default function AllVideos(props) {
   const {loading, Videos, getVideos} = props;
   const classes = useStyles();
   const [search, setSearch] = React.useState("");
 
-  
 
-  //const DummyData = [...new Array(80)];
+
+  const DummyData = [...new Array(80)];
   const itemsPerPage = 8;
   const [page, setPage] = React.useState(1);
   const [noOfPages] = React.useState(
@@ -101,14 +128,19 @@ export default function AllVideos(props) {
     setPage(value);
   };
 
-  
 
 
-  
+  const filled = () => {
+    for(var i = 0; i < DummyData.length; i++){
+      DummyData[i] = i;
+    }
+
+  }
+
 
   useEffect(() => {
     getVideos();
-    
+
   }, [])
   function youtube_parser(url){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -116,9 +148,15 @@ export default function AllVideos(props) {
     return (match&&match[7].length===11)? match[7] : false;
 }
 
+
+const searchItem = (e) => {
+  setSearch(e.target.value);
+
+}
+
   return (
       <>
-          
+{filled()}
     <Paper
       sx={{
         width: "100vw",
@@ -133,20 +171,18 @@ export default function AllVideos(props) {
       }}
       elevation={12}
     >
-      
+
       <Grid
         container
         direction="row"
-        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around' }}
+        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around',marginTop : {xs :'2vh', md : '20vh'}  }}
       >
         {/* Research input */}
 
         <Grid item xs={6} sm={6} md={6}>
-        <CssTextField type='search' label="Search" id="custom-css-outlined-input" onChange={(e) => {
-            setSearch(e.target.value); console.log(search)
-          }} />
+        
         </Grid>
-       
+
         <Grid item xs={6} sm={6} md={6}>
           <Typography  variant="h2" color="white"> المرئيات </Typography>
           </Grid>
@@ -154,9 +190,11 @@ export default function AllVideos(props) {
 
       </Paper>
 
+     <SearchComponent searchItem ={searchItem} CategoryText={'القسم'} />
 
-                      {/* Cards Grid */}
-      <Grid container spacing={3} >
+
+                      {/* Videos Grid */}
+      <Grid container spacing={3} padding={{xs:4, sm:6,md:8}} >
         {Videos.filter((item) => {
                   if (search === "") {
                     return item;
@@ -168,11 +206,11 @@ export default function AllVideos(props) {
                 }).slice((page - 1) * itemsPerPage, page * itemsPerPage).map(
           (item, index) => {
             return (
-              <Grid item xs={12} sm={6} md={3} >
+              <Grid item xs={12} sm={6} md={4} >
                     <Link to={`/AllVideos/${item.id}`}>
                 <Card sx={{ Width: '100%',  m: 3, height: '100%'}}>
-      <CardHeader sx={{height:"50%"}}
-        
+      <CardHeader sx={{height:{sm:'65%', md:'50%', xs:'47%'}}}
+
         title={
           loading===true ? (
             <Skeleton
@@ -182,8 +220,8 @@ export default function AllVideos(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            <Box noWrap height='20%'>
-            <Typography textOverflow='clip' whipeSpace='noWrap' align='center' variant='h6'>{item.title} </Typography>
+            <Box noWrap height='30%'>
+            <Typography textOverflow='clip' whipeSpace='noWrap' align='center' variant='subtitle1'>{item.title} </Typography>
             </Box>
           )
         }
@@ -191,39 +229,40 @@ export default function AllVideos(props) {
           loading===true ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            
-          `${item.slug}` 
-         
+
+          `${item.slug}`
+
           )
         }
       />
-      {loading===true ? (
+       {loading===true ? (
         <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
       ) : (
         <CardMedia
-          
+
           height="100%"
-          
-          sx={{height:'100%'}}
+
+          sx={{height:{sm:'40%', md:'55%', xs:'55%'}}}
         >
-            <img src={`http://img.youtube.com/vi/${youtube_parser(item.youtube_link)}/0.jpg`} alt='ez' style={{height:"50%", width:'100%'}}  />
+            <img src={`http://img.youtube.com/vi/${youtube_parser(item.youtube_link)}/0.jpg`} alt='ez' style={{height:"100%", width:'100%'}}  />
           </CardMedia>
-      )}
-      
+      )} 
+
     </Card>
     </Link>
-  
+
 
 
               </Grid>
             );
           }
           )}
-          
+
         <Divider />
-       <Grid item xs={12} sm={12} md={12} mb={1} >
-        <Box component="span">
-          <Pagination
+       <Grid item xs={12} sm={12} md={12} mb={1} direction='row' pt={10} sx={{display:'flex'}}>
+         
+       
+        {/* <Pagination
             count={noOfPages}
             page={page}
             onChange={handleChange}
@@ -234,12 +273,15 @@ export default function AllVideos(props) {
             showLastButton
             boundaryCount={1}
             classes={{ ul: classes.paginator }}
-          />
-        </Box>
+            sx={{padding:3}}
+          /> */}
+
+          <Pagination noOfPages={noOfPages} handleChange={handleChange} page={page} />
+        
         </Grid>
       </Grid>
-          
+
       </>
-   
+
   );
 }

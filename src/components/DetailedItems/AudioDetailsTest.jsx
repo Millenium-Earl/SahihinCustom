@@ -85,7 +85,7 @@ export default function AudioDetails({match})  {
             <Grid
             container
             direction="row"
-            sx={{ display: "flex", alignItems: "center", justifyContent:'space-around' }}
+            sx={{ display: "flex", alignItems: "center", justifyContent:'space-around', marginTop : {xs :'2vh', md : '10vh'} }}
           >
             
     

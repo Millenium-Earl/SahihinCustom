@@ -9,10 +9,6 @@ import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import { TextDirection } from '@react-pdf-viewer/core';
 import { useMediaQuery } from 'react-responsive'
 
-
-
-
-
 import ar_AE from '@react-pdf-viewer/locales/lib/ar_AE.json';
 
 
@@ -21,11 +17,13 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
 
+
 import {
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from '@mui/material/styles';
+import { maxHeight } from "@mui/system";
 
 
   
@@ -42,6 +40,7 @@ const axios = require("axios");
 
 
 
+
 export default function BookDetails (props) {
 
   const [currentPage, setCurrentPage] = useState(() => {
@@ -51,7 +50,7 @@ export default function BookDetails (props) {
   });
   
 
-  const largeScreen = useMediaQuery({minWidth: '600px'});
+  const largeScreen = useMediaQuery({minWidth: '1069px'});
 
   const {match} = props;
   const defaultLayoutPluginInstance = defaultLayoutPlugin({
@@ -143,7 +142,7 @@ export default function BookDetails (props) {
       <Grid
         container
         direction="row"
-        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around' }}
+        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around', marginTop : {xs :'2vh', md : '10vh'} }}
       >
         {/* Research input */}
 
@@ -160,23 +159,18 @@ export default function BookDetails (props) {
 
 
 
-                <Grid item xs={12} sm={6} md={6} className={'LeftPic'} sx={{display : "flex" , justifyContent:'space-evenly'}}>
+                <Grid item xs={12} sm={8} md={8} className={'LeftPic'} sx={{display : "flex" , justifyContent :'space-around', height:{largeScreen:"80vh", xs:"80vh"}, width:{largeScreen:"50vw", xs:"102vw"}}}>
 
                {/* <img src={itemBook.cover} alt="" /> */}
 { reading===false ? 
                <img src={itemBook.cover}
                alt = '' /> 
                :
-    <div
-    style={{
-     // paddingRight :"2rem",
-        height: '80vh',
-        width : '100%'
-    }}
->
+    <div style={{width:'100%',
+    maxHeight:"80vh"}}>
     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
    
-    <Viewer  fileUrl={itemBook.book_pdf} localization={ar_AE} plugins={[defaultLayoutPluginInstance , getFilePluginInstance]} theme={{direction: TextDirection.RightToLeft}} initialPage={initialPage} onPageChange={handlePageChange} defaultScale= {SpecialZoomLevel.PageFit} />
+    <Viewer  fileUrl={itemBook.book_pdf} localization={ar_AE} plugins={[defaultLayoutPluginInstance , getFilePluginInstance]} theme={{direction: TextDirection.RightToLeft}} initialPage={initialPage} onPageChange={handlePageChange} defaultScale= {SpecialZoomLevel.PageWidth} />
 
 
 
@@ -185,7 +179,7 @@ export default function BookDetails (props) {
 }
                 </Grid>
 
-                <Grid item xs={12} sm={6} md={6} className={'RightContent'}>
+                <Grid item xs={12} sm={4} md={4} className={'RightContent'}>
                 <Grid container spacing={2} direction="column" >
 
 
@@ -197,7 +191,7 @@ export default function BookDetails (props) {
 
                     <Grid item xs={6} sm={6} md={6} className={'RightBottomContentButtons'} spacing={6} margin={5}>
 
-            <Button  color="secondary" variant="outlined" size ="large" onClick={handleChange} sx={{backgroundColor :'#836F6C' , color : "white", "&:hover": { color : 'black', backgroundColor :" white"}, margin:"5vw" } } >
+            <Button  color="secondary" variant="outlined" size ="large" onClick={handleChange} sx={{backgroundColor :'#836F6C' , color : "white", "&:hover": { color : 'black', backgroundColor :" white"}, margin:"5vw"} } >
               { reading === false ?
               'بدء القراءة' :
               'الغلاف'

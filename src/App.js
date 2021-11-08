@@ -19,7 +19,6 @@ import PrayerCardDetails from "./components/DetailedItems/PrayerCardDetails";
 import FatawiDetails from './components/DetailedItems/FatawiDetails'
 import BookDetails from './components/DetailedItems/BookDetails'
 import VideoDetails from "./components/DetailedItems/VideoDetails";
-//import AudioDetails from "./components/DetailedItems/AudioDetails";
 import AudioDetailsTest from './components/DetailedItems/AudioDetailsTest'
 
 
@@ -130,7 +129,7 @@ function App() {
     <div className="App">
       <Router>
         <Nav />
-        <DateComponent />
+         {/* <DateComponent />  */}
         <ScrollToTop>
         <Switch>
           <Route path="/" exact>

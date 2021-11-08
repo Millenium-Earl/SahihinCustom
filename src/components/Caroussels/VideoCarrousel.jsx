@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
@@ -23,7 +24,7 @@ const responsive = {
     mobile: {
       breakpoint: { max: 625, min: 0 },
       items: 1,
-      slidesToSlide: 1 // optional, default to 1.
+      slidesToSlide: 0 // optional, default to 1.
     }
   };
   function youtube_parser(url){
@@ -36,23 +37,22 @@ const responsive = {
 
 
   return (
-    <>
-    {console.log(ua.getDevice())}
-   
+    
+    <Grid container  spacing={5} paddingLeft={{xs:3,sm:10, md:10}} paddingRight={{xs:3,sm:10, md:10}} height={'80%'}>
+      <Grid item xs={12} sm={12} md={12}>
+      <div style={{border : "3px solid rgba(0,0,0,0.4)", borderRadius: '20px', marginTop:'40px'}}>
   <Carousel
     swipeable={true}
-    centerMode
     draggable={true}
-    showDots={false}
+    showDots={true}
     responsive={responsive}
-    infinite
-    autoPlay={true}
+    autoPlay={false}
     autoPlaySpeed={5000}
     keyBoardControl={true}
     minimumTouchDrag={80}
     transitionDuration={400}
     containerClass="carousel-container"
-    removeArrowOnDeviceType={["tablet", "mobile"]}
+    removeArrowOnDeviceType={["mobile"]}
     deviceType={responsive}
     dotListClass="custom-dot-list-style"
     itemClass="carousel-item-padding-40-px"
@@ -63,8 +63,11 @@ const responsive = {
               )}
           
   </Carousel>
+  </div>
+  </Grid>
+  </Grid>
   
-  </>
+  
   )
 
 

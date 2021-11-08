@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
@@ -27,8 +28,8 @@ const responsive = {
     }
   };
   return (
-    <>
-    {console.log(ua.getDevice())}
+    <Grid container spacing={5} paddingLeft={{xs:3,sm:10, md:10}} paddingRight={{xs:3,sm:10, md:10}} height={'80%'}>
+      <Grid item xs={12} md={12} sm={12}>
     
   <Carousel
     swipeable={true}
@@ -54,7 +55,9 @@ const responsive = {
             )}
         
   </Carousel>
-  </>
+ </Grid>
+ </Grid> 
+  
   )
 
 

@@ -4,10 +4,11 @@ import MainTitle from "./MainTitle";
 import PrayerCarrousel from "./Caroussels/PrayerCarrousel";
 import BannerTitle from "./BannerTitle";
 import BookCarrousel from './Caroussels/BookCarrousel'
+import BookCarrouselCat from './Caroussels/BookCarrouselCat'
 import AudioCarrousel from "./Caroussels/AudioCarrousel"
 import VideoCarrousel from './Caroussels/VideoCarrousel'
 import FatawiCarrousel from './Caroussels/FatawiCarrousel'
-import DateComponentTest from "./DateComponentTest";
+import DateComponent from "./DateComponent";
 
 
 import {
@@ -49,8 +50,8 @@ export default function GridContent(props) {
     <Grid
       container
       spacing={0}
-      padding={5}
-      sx={{ width: "100vw", margin: 0, padding: 0, height: "100%" }}
+      
+      sx={{ width: "100vw", marginTop : {xs :'2vh', md : '20vh'}, padding: 0, height: "100%",  }}
     >
       {/* title image */}
       <Grid
@@ -61,7 +62,7 @@ export default function GridContent(props) {
         width={"100vw"}
         sx={{ width: "100vw", margin: 0, padding: 0, height: "50%" }}
       >
-        <MainTitle />
+         <MainTitle /> 
       </Grid>
 
       {/* Date and Time */}
@@ -72,7 +73,7 @@ export default function GridContent(props) {
         lg={12}
         width={"100vw"}
         sx={{ width: "100vw", marginLeft: 0, padding: 0, height: "100%" }}
-      > <DateComponentTest /> </Grid>
+      > <DateComponent /> </Grid>
 
       {/* Caroussel Prayer Cards */}
       <Grid
@@ -100,7 +101,8 @@ export default function GridContent(props) {
         sx={{ width: "100vw", margin: 0, paddingTop: "20px" }}
       >
         <BannerTitle title={"كتب السنّة"} image={'./LogoWhite.png'} link={'AllBooks'} />
-       <BookCarrousel Books={Books} getBooks={getBooks} />
+     {/* <BookCarrousel Books={Books} getBooks={getBooks} /> */}
+     <BookCarrouselCat Books={Books} getBooks={getBooks} />
       </Grid>
 
 

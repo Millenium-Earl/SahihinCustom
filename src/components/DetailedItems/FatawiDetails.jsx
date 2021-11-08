@@ -56,7 +56,7 @@ export default function FatawiDetails({match}) {
 return(
     <>
         
-    <Grid container spacing={0} direction='row'>
+    <Grid container spacing={0} direction='row' sx={{marginTop : {xs :'2vh', md : '10vh'}}}>
     <Paper
       sx={{
         width: "100vw",
@@ -94,7 +94,7 @@ return(
 
     
     
-  <img style={{float : 'left', shapOutside: 'marginBox', maxWidth:'100%' }} src={itemFatawi.picture} alt='fatawi' />
+  <img style={{float : 'left', shapOutside: 'marginBox', maxWidth:'100%', marginTop:'2vh' }} src={itemFatawi.picture} alt='fatawi' />
 
   
 

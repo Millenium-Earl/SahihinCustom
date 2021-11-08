@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
   card : {
 margin : 12,
-borderRadius : 400,
+borderRadius : 0,
   },
 
     action: {
@@ -39,7 +39,7 @@ borderRadius : 400,
 
 margin : 2,
   height: "85%",
-  maxWidth: 345, 
+  maxWidth: 570, 
  
 
 }
@@ -84,17 +84,12 @@ function isArabic(text) {
 export default function MultiActionAreaCard(props) {
 
   
-  const TickRef = useRef(null)
-  const divRef = useRef(null)
+  
     const {name, picture, slug, cover, thumbnail} = props;
     const classes = useStyles()
-    useEffect(() => {
-      console.log(TickRef.current?.state.width)
-      console.log(divRef.offsetWidth)
-     
-    }, [TickRef.current?.state.width])
+    
   return (
-    <Card className={classes.card} sx={{borderRadius:10}}>
+    <Card className={classes.card} sx={{borderRadius:10, "& .MuiPaper-root" :{opacity :'4%'}}}>
       <CardActionArea className={classes.action}>
         <CardMedia 
           component="img"
@@ -102,10 +97,10 @@ export default function MultiActionAreaCard(props) {
           image={picture ? picture : cover? cover : thumbnail}
           alt="sad cat"
         />
-        <CardContent className={classes.content}>
+        <CardContent  raised='true' className={classes.content}>
             
           <Typography gutterBottom variant="h5" component="Container" noWrap>
-        <Ticker direction={isArabic(name) ? 'toRight' : 'toLeft'} offset={'50%'} mode={"smooth"} className={'elTicker'} ref={TickRef}>
+        <Ticker direction={isArabic(name) ? 'toRight' : 'toLeft'} offset={'50%'} mode={"smooth"} className={'elTicker'} >
         {({ index }) => (
             
             <>

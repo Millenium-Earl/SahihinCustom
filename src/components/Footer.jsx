@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { AiFillFacebook, AiFillInstagram,AiOutlineTwitter, AiFillYoutube,AiOutlineCopyrightCircle } from 'react-icons/ai';
 import {FaTelegram} from 'react-icons/fa';
+import {GoChevronLeft} from 'react-icons/go'
 
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
@@ -60,7 +61,7 @@ export default function Footer() {
 </MDBContainer>
                 {/* Bottom of the middle grid */}
                 </Grid>
-                <Divider />
+                <Divider sx={{border: "3px solid rgba(0,0,0,.1)"}} />
                 
                 <Grid item xs={12} sm={6} md={6} className={'copyright'}>
                     <Typography variant='h5' color='white'>    جميع الحقوق محفوضة لصفحة الصحيحين 2021 <AiOutlineCopyrightCircle /> </Typography>
@@ -79,7 +80,7 @@ export default function Footer() {
               
                 <ListItem sx={{padding :1 ,marginLeft :10 }}>
                   <ListItemIcon sx={{padding :2 , margin :0 }}>
-                    <ArrowBackIosIcon />
+                  <GoChevronLeft style={{color:'#F4B183', fontWeight:'bold', fontSize:'40px' }} />
                   </ListItemIcon>
                   <ListItemText
                     primary={<Typography variant="h6" color="white">   تابعونا عبر مواقع التواصل الإجتماعي</Typography>}
@@ -91,7 +92,7 @@ export default function Footer() {
 
                 <ListItem sx={{padding :1 ,marginLeft :10 }}>
                   <ListItemIcon sx={{padding :2 ,marginLeft :0}}>
-                  <ArrowBackIosIcon />
+                  <GoChevronLeft style={{color:'#F4B183', fontWeight:'bold', fontSize:'40px' }} />
                   </ListItemIcon>
                   <ListItemText
                     primary={<Typography variant='h6' color='white'> <AiFillFacebook onClick={''} /> <AiFillInstagram /> <AiOutlineTwitter /> <AiFillYoutube /> <FaTelegram /> Sahinin</Typography>}

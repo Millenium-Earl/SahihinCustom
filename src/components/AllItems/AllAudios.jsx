@@ -6,16 +6,18 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {  CardHeader, CardMedia, Pagination, Skeleton} from "@mui/material";
+import {  CardHeader, CardMedia, Skeleton} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
+import Pagination from "../Pagination";
 
 import {
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
+import SearchComponent from "../SearchComponent";
 
 
 let theme = createTheme();
@@ -78,7 +80,10 @@ export default function AllAudios(props) {
   };
 
 
-
+  const searchItem = (e) => {
+    setSearch(e.target.value);
+  
+  }
   
 
   useEffect(() => {
@@ -107,14 +112,12 @@ export default function AllAudios(props) {
       <Grid
         container
         direction="row"
-        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around' }}
+        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around',marginTop : {xs :'2vh', md : '20vh'} }}
       >
         {/* Research input */}
 
         <Grid item xs={6} sm={6} md={6}>
-        <CssTextField type='search' label="Search" id="custom-css-outlined-input" onChange={(e) => {
-            setSearch(e.target.value); console.log(search)
-          }} />
+
         </Grid>
        
         <Grid item xs={6} sm={6} md={6}>
@@ -123,9 +126,9 @@ export default function AllAudios(props) {
       </Grid>
 
       </Paper>
+      <SearchComponent searchItem ={searchItem} CategoryText={'القسم'}/>
 
-
-                      {/* Cards Grid */}
+                      {/* Videos Grid */}
       <Grid container spacing={3} >
         {Audios.filter((item) => {
                   if (search === "") {
@@ -138,7 +141,7 @@ export default function AllAudios(props) {
                 }).slice((page - 1) * itemsPerPage, page * itemsPerPage).map(
           (item, index) => {
             return (
-              <Grid item xs={12} sm={6} md={3} >
+              <Grid item xs={12} sm={6} md={4} >
                     <Link to={`/AllAudios/${item.id}`}>
                 <Card sx={{ Width: '100%',  m: 3, height: 'auto'}}>
       <CardHeader
@@ -192,18 +195,8 @@ export default function AllAudios(props) {
         <Divider />
        <Grid item xs={12} sm={12} md={12} mb={1} >
         <Box component="span">
-          <Pagination
-            count={noOfPages}
-            page={page}
-            onChange={handleChange}
-            defaultPage={1}
-            color="secondary"
-            size="large"
-            showFirstButton
-            showLastButton
-            boundaryCount={1}
-            classes={{ ul: classes.paginator }}
-          />
+        <Pagination noOfPages={noOfPages} handleChange={handleChange} page={page} />
+
         </Box>
         </Grid>
       </Grid>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import createBreakpoints from '@mui/system/createTheme/createBreakpoints'
 
 
 import * as serviceWorker from './serviceWorker';
@@ -9,11 +10,23 @@ import * as serviceWorker from './serviceWorker';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 
 
-const font =  "'Almarai', sans-serif;";
+const font =  "'Hacen', sans-serif;";
+const breakpoints = createBreakpoints({})
 
 let theme = createTheme(
   {typography: {
-  fontFamily: font }
+  fontFamily: font ,
+color:'#000202'},
+breakpoints: {
+  values: {
+    xs: 0,
+    sm: 500,
+    md: 850,}
+     
+
+  }
+
+
   },
 )
 theme = responsiveFontSizes(theme)

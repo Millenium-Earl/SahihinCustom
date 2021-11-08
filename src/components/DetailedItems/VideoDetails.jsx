@@ -58,6 +58,7 @@ export default function VideoDetails({ match }) {
           right: 0,
           pt:3,
         pb:2,
+        pr:3,
           mt: 10,
           background:
             "linear-gradient(82deg, rgba(73,56,54,1) 23%, rgba(131,111,108,1) 79%)",
@@ -72,12 +73,13 @@ export default function VideoDetails({ match }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-around",
+            marginTop : {xs :'2vh', md : '20vh'}
           }}
         >
           {/* Research input */}
 
           <Grid item xs={12} sm={12} md={12}>
-            <Typography variant="h2" color="white">
+            <Typography variant="h3" color="white">
               {" "}
               {itemVideo.title}
             </Typography>

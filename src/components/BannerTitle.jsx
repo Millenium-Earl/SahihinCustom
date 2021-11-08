@@ -2,14 +2,10 @@ import React from 'react';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
+import {AiFillCaretDown} from 'react-icons/ai'
 
 import { Link } from 'react-router-dom';
 
-import {
-    createTheme,
-    responsiveFontSizes,
-    ThemeProvider,
-  } from '@mui/material/styles';
 
 
 
@@ -22,30 +18,25 @@ import {
   export default function Footer(props) {
     
    
-    const {title, image, link} = props
+    const {title, link} = props
 
 
 
     return ( 
+      <>
+      <Paper sx={{ width : '102vw',bottom: 0, left: 0, right: 0, mt:1, background: 'linear-gradient(82deg, rgba(79,65,64,1) 15%, rgba(168,139,134,1) 63%)', marginBottom : 0, height:'8vh', display :'flex', alignItems:'center' }} elevation={12}>
      
-        <Paper sx={{ width : '99vw',bottom: 0, left: 0, right: 0, mt:2, background: 'linear-gradient(82deg, rgba(73,56,54,1) 23%, rgba(131,111,108,1) 79%)', borderRadius:"50px", marginBottom : 0  }} elevation={12}>
-                    <Grid container direction='row' sx={{display:'flex', alignItems:'center'}}>
+      <Grid container direction='row' sx={{display:'flex', alignItems:'flex-start'}}>
 
 
                         {/* Logo */}
-                        <Grid item xs={1} sm={1} md={1}>
-                                <img src={image} alt='logo' width='70%'/>
-                            </Grid>
+                       
 
 
-                      <Grid item xs={9} sm={9} md={9}>
-                               
-     <Typography variant='h4' color={"white"}> {title} </Typography>
-                    </Grid>
+                      
 
-
-     <Grid item xs={2} sm={2} md={2}>
-     <Link to={`/${link}/`}>   <Typography variant="h6" color={"white"}>  اظهار الكل </Typography></Link>
+     <Grid dir={'rtl'} item xs={12} sm={12} md={12} sx={{ display:"flex", justifyContent:'flex-start', marginRight:'6vw'}}>
+     <Link to={`/${link}/`}>   <Typography variant="h3" color={"white"}>  {title} <AiFillCaretDown />  </Typography></Link>
                       
                             </Grid> 
 
@@ -54,7 +45,16 @@ import {
          
     
       </Paper>
-     
+        <Grid container>
+     <Grid item xs={12} sm={12} md={12}>
+      <Paper sx={{ width : '101vw',bottom: 0, left: 0, right: 0, mt:0, background: '#FFD966', marginBottom : 0, height:'1vh' }} elevation={12}>
+       
+        </Paper>
+       </Grid> 
 
+        </Grid>
+
+     
+</>
     )
 }

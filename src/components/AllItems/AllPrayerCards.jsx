@@ -6,16 +6,21 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {  CardHeader, CardMedia, Pagination, Skeleton} from "@mui/material";
+import {  CardHeader, CardMedia, Skeleton} from "@mui/material";
+
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
+import Pagination from '../Pagination'
+
+
 
 import {
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
+import SearchComponent from "../SearchComponent";
 
 
 
@@ -105,7 +110,10 @@ export default function AllPrayerCards(props) {
   };
 
   
-
+  const searchItem = (e) => {
+    setSearch(e.target.value);
+  
+  }
   
   useEffect(() => {
      getPrayerCards();
@@ -132,14 +140,12 @@ export default function AllPrayerCards(props) {
       <Grid
         container
         direction="row"
-        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around' }}
+        sx={{ display: "flex", alignItems: "center", justifyContent:'space-around', marginTop : {xs :'2vh', md : '20vh'} }}
       >
         {/* Research input */}
 
         <Grid item xs={6} sm={6} md={6}>
-        <CssTextField type='search' label="Search" id="custom-css-outlined-input" onChange={(e) => {
-            setSearch(e.target.value); console.log(search)
-          }} />
+       
         </Grid>
        
         <Grid item xs={6} sm={6} md={6}>
@@ -148,10 +154,10 @@ export default function AllPrayerCards(props) {
       </Grid>
 
       </Paper>
-
+      <SearchComponent searchItem ={searchItem} CategoryText={'صنف البطاقة'}/>
 
                       {/* Cards Grid */}
-      <Grid container spacing={3} >
+      <Grid container spacing={3} padding={{xs:4, sm:6,md:8}} >
         {PrayerCards.filter((item) => {
                   if (search === "") {
                     return item;
@@ -163,11 +169,11 @@ export default function AllPrayerCards(props) {
                 }).slice((page - 1) * itemsPerPage, page * itemsPerPage).map(
           (item, index) => {
             return (
-              <Grid item xs={12} sm={6} md={3} >
+              <Grid item xs={12} sm={6} md={4} >
                     <Link to={`/AllCards/${item.id}`}>
                 <Card sx={{ Width: '100%',  m: 3, height: '100%'}}>
       <CardHeader
-        sx={{height:"20%"}}
+      sx={{height:{ md:'30%', sm:'40%' , xs:'40%'}}}
         title={
           loading=== true ? (
             <Skeleton
@@ -197,11 +203,11 @@ export default function AllPrayerCards(props) {
       ) : (
         <CardMedia
           
-          height="100%"
+        
           
-         sx={{height:"100%"}}
+         sx={{height:{ md:'70%', sm:'60%' , xs:'60%'}}}
         >
-          <img src={item.picture} alt="" style={{height:"80%", width:'100%'}} />
+          <img src={item.picture} alt="" style={{ height: "100%",width:'100%'}} />
           </CardMedia>
       )}
 
@@ -219,18 +225,7 @@ export default function AllPrayerCards(props) {
         <Divider />
        <Grid item xs={12} sm={12} md={12} mb={1} >
         <Box component="span">
-          <Pagination
-            count={noOfPages}
-            page={page}
-            onChange={handleChange}
-            defaultPage={1}
-            color="secondary"
-            size="large"
-            showFirstButton
-            showLastButton
-            boundaryCount={1}
-            classes={{ ul: classes.paginator }}
-          />
+        <Pagination noOfPages={noOfPages} handleChange={handleChange} page={page} />
         </Box>
         </Grid>
       </Grid>
