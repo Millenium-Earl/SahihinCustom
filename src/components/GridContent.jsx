@@ -9,6 +9,7 @@ import AudioCarrousel from "./Caroussels/AudioCarrousel"
 import VideoCarrousel from './Caroussels/VideoCarrousel'
 import FatawiCarrousel from './Caroussels/FatawiCarrousel'
 import DateComponent from "./DateComponent";
+import EmptyCarroussel from './Caroussels/EmptyCarroussel'
 
 
 import {
@@ -20,6 +21,14 @@ import {
 const axios = require("axios");
 
 export default function GridContent(props) {
+  const DummyData = [...new Array(10)];
+  const filled = () => {
+    for(var i = 0; i < DummyData.length; i++){
+      DummyData[i] = i;
+      
+    }
+   
+  }
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
   const {
@@ -53,6 +62,7 @@ export default function GridContent(props) {
       
       sx={{ width: "100vw", marginTop : {xs :'2vh', md : '20vh'}, padding: 0, height: "100%",  }}
     >
+      {filled()}
       {/* title image */}
       <Grid
         item
@@ -86,7 +96,8 @@ export default function GridContent(props) {
         sx={{ width: "100vw", margin: 0, paddingTop: "20px" }}
       >
          <BannerTitle title={"البطاقات الدعويّة"} image={'./LogoWhite.png'} link={'AllCards'} />
-        <PrayerCarrousel PrayerCards={PrayerCards} getPrayerCards={getPrayerCards} />
+         { loading===false?(
+        <PrayerCarrousel PrayerCards={PrayerCards} getPrayerCards={getPrayerCards} loading={loading} />) : (<EmptyCarroussel loading={loading} />)}
       </Grid>
 
 
@@ -102,7 +113,8 @@ export default function GridContent(props) {
       >
         <BannerTitle title={"كتب السنّة"} image={'./LogoWhite.png'} link={'AllBooks'} />
      {/* <BookCarrousel Books={Books} getBooks={getBooks} /> */}
-     <BookCarrouselCat Books={Books} getBooks={getBooks} />
+     
+     <BookCarrouselCat Books={Books} getBooks={getBooks} loading={loading} />
       </Grid>
 
 
@@ -117,7 +129,8 @@ export default function GridContent(props) {
         sx={{ width: "100vw", margin: 0, paddingTop: "20px" }}
       >
         <BannerTitle title={"الصوتيات"} image={'./LogoWhite.png'} link={'AllAudios'} />
-       <AudioCarrousel Audios={Audios} />
+        { loading===false?(
+       <AudioCarrousel Audios={Audios} loading={loading} DummyData={DummyData} /> ) : ( <EmptyCarroussel loading={loading} /> )}
       </Grid>
 
 
@@ -132,7 +145,8 @@ export default function GridContent(props) {
         sx={{ width: "100vw", margin: 0, paddingTop: "20px" }}
       >
         <BannerTitle title={"المرئيات"} image={'./LogoWhite.png'} link={'AllVideos'} />
-       <VideoCarrousel Videos={Videos} />
+        { loading===false?(
+       <VideoCarrousel Videos={Videos} loading={loading} />) : ( <EmptyCarroussel loading={loading} /> ) }
       </Grid>
 
 
@@ -147,7 +161,8 @@ export default function GridContent(props) {
         sx={{ width: "100vw", margin: 0, paddingTop: "20px" }}
       >
         <BannerTitle title={"فتـــــــاوى"} image={'./LogoWhite.png'} link={'AllFatawis'} />
-       <FatawiCarrousel Fatawis={Fatawis} />
+        { loading===false?(
+       <FatawiCarrousel Fatawis={Fatawis} loading={loading} /> ) : ( <EmptyCarroussel loading={loading} />) }
       </Grid>
 
     </Grid>

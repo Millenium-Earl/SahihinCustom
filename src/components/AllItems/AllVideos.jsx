@@ -117,7 +117,7 @@ export default function AllVideos(props) {
 
 
 
-  const DummyData = [...new Array(80)];
+  const DummyData = [...new Array(20)];
   const itemsPerPage = 8;
   const [page, setPage] = React.useState(1);
   const [noOfPages] = React.useState(
@@ -154,6 +154,8 @@ const searchItem = (e) => {
 
 }
 
+
+
   return (
       <>
 {filled()}
@@ -179,11 +181,9 @@ const searchItem = (e) => {
       >
         {/* Research input */}
 
-        <Grid item xs={6} sm={6} md={6}>
         
-        </Grid>
 
-        <Grid item xs={6} sm={6} md={6}>
+        <Grid item xs={12} sm={12} md={12} sx={{display :'flex', justifyContent:{xs : 'space-around',sm:'flex-end', md:'flex-end'},marginRight : {xs: 0, sm:7, md:9}, paddingTop:'2vh', paddingBottom:'2vh'}}>
           <Typography  variant="h2" color="white"> المرئيات </Typography>
           </Grid>
       </Grid>
@@ -195,7 +195,9 @@ const searchItem = (e) => {
 
                       {/* Videos Grid */}
       <Grid container spacing={3} padding={{xs:4, sm:6,md:8}} >
-        {Videos.filter((item) => {
+
+
+        {loading===false? (Videos.filter((item) => {
                   if (search === "") {
                     return item;
                   } else if (
@@ -212,32 +214,21 @@ const searchItem = (e) => {
       <CardHeader sx={{height:{sm:'65%', md:'50%', xs:'47%'}}}
 
         title={
-          loading===true ? (
-            <Skeleton
-              animation="wave"
-              height={10}
-              width="100%"
-              style={{ marginBottom: 6 }}
-            />
-          ) : (
+         
             <Box noWrap height='30%'>
             <Typography textOverflow='clip' whipeSpace='noWrap' align='center' variant='subtitle1'>{item.title} </Typography>
             </Box>
-          )
+          
         }
         subheader={
-          loading===true ? (
-            <Skeleton animation="wave" height={10} width="40%" />
-          ) : (
+         
 
           `${item.slug}`
 
-          )
+          
         }
       />
-       {loading===true ? (
-        <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
-      ) : (
+       
         <CardMedia
 
           height="100%"
@@ -246,7 +237,7 @@ const searchItem = (e) => {
         >
             <img src={`http://img.youtube.com/vi/${youtube_parser(item.youtube_link)}/0.jpg`} alt='ez' style={{height:"100%", width:'100%'}}  />
           </CardMedia>
-      )} 
+      
 
     </Card>
     </Link>
@@ -256,25 +247,48 @@ const searchItem = (e) => {
               </Grid>
             );
           }
-          )}
+          )) : (DummyData.slice((page - 1) * itemsPerPage, page * itemsPerPage).map(
+    (item, index) => {
+      return (
+        <Grid item xs={12} sm={6} md={4} >
+           
+          <Card sx={{ Width: '100%',  m: 3, height: 'auto'}}>
+<CardHeader 
+
+  title={
+   
+      <Skeleton
+        animation="wave"
+        height={10}
+        width="100%"
+        style={{ marginBottom: 6 }}
+      />
+    
+  }
+  subheader={
+    
+      <Skeleton animation="wave" height={10} width="40%" />
+    
+  }
+/>
+ {
+  <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
+
+} 
+
+</Card>
+
+
+
+        </Grid>
+      );
+    }
+    ))}
 
         <Divider />
        <Grid item xs={12} sm={12} md={12} mb={1} direction='row' pt={10} sx={{display:'flex'}}>
          
-       
-        {/* <Pagination
-            count={noOfPages}
-            page={page}
-            onChange={handleChange}
-            defaultPage={1}
-            color="secondary"
-            size="large"
-            showFirstButton
-            showLastButton
-            boundaryCount={1}
-            classes={{ ul: classes.paginator }}
-            sx={{padding:3}}
-          /> */}
+    
 
           <Pagination noOfPages={noOfPages} handleChange={handleChange} page={page} />
         

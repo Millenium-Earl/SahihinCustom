@@ -94,6 +94,7 @@ export default function AllBooks(props) {
   const [search, setSearch] = React.useState("");
   
   
+  const DummyData = [...new Array(20)];
 
   //const DummyData = [...new Array(80)];
   const itemsPerPage = 8;
@@ -112,7 +113,12 @@ export default function AllBooks(props) {
     setSearch(e.target.value);
   
   }
+  const filled = () => {
+    for(var i = 0; i < DummyData.length; i++){
+      DummyData[i] = i;
+    }
 
+  }
   useEffect(() => {
     getBooks();
     
@@ -120,7 +126,7 @@ export default function AllBooks(props) {
   
   return (
       <>
-          
+          {filled()}
     <Paper
       sx={{
         width: "100vw",
@@ -143,12 +149,9 @@ export default function AllBooks(props) {
       >
         {/* Research input */}
 
-        <Grid item xs={6} sm={6} md={6}>
-        
-          
-        </Grid>
        
-        <Grid item xs={6} sm={6} md={6}>
+       
+        <Grid item xs={12} sm={12} md={12} sx={{display :'flex', justifyContent:{xs : 'space-around',sm:'flex-end', md:'flex-end'},marginRight : {xs: 0, sm:7, md:9}, paddingTop:'2vh', paddingBottom:'2vh'}}>
           <Typography  variant="h2" color="white"> كتب السنّة</Typography>
           </Grid>
       </Grid>
@@ -159,7 +162,7 @@ export default function AllBooks(props) {
 
                       {/* Books Grid */}
       <Grid container spacing={3} padding={{xs:4, sm:6,md:8}}>
-        {Books.filter((item) => {
+        {loading===false? Books.filter((item) => {
                   if (search === "") {
                     return item;
                   } else if (
@@ -176,39 +179,29 @@ export default function AllBooks(props) {
       <CardHeader
         
         title={
-          loading===true ? (
-            <Skeleton
-              animation="wave"
-              height={10}
-              width="100%"
-              style={{ marginBottom: 6 }}
-            />
-          ) : (
+          
             <Box noWrap height='20%'>
             <Typography textOverflow='clip' whipeSpace='noWrap' align='center' variant='h6'>{item.title} </Typography>
             </Box>
-          )
+          
         }
         subheader={
-          loading===true ? (
-            <Skeleton animation="wave" height={10} width="40%" />
-          ) : (
+         
             
           `${item.slug}` 
          
-          )
+          
         }
       />
-      {loading===true ? (
-        <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
-      ) : (
+      {
+        
         <CardMedia
           component="img"
           height="100%"
           image={item.cover}
           alt="image"
         />
-      )}
+      }
 
       
     </Card>
@@ -219,7 +212,48 @@ export default function AllBooks(props) {
               </Grid>
             );
           }
-          )}
+          ) : 
+          
+          
+          
+          DummyData.slice((page - 1) * itemsPerPage, page * itemsPerPage).map(
+    (item, index) => {
+      return (
+        <Grid item xs={12} sm={6} md={4} >
+              
+          <Card sx={{ Width: '100%',  m: 3, height: 'auto'}}>
+<CardHeader
+  
+  title={
+   
+      <Skeleton
+        animation="wave"
+        height={10}
+        width="100%"
+        style={{ marginBottom: 6 }}
+      />
+  
+  }
+  subheader={
+   
+      <Skeleton animation="wave" height={10} width="40%" />
+   
+  }
+/>
+
+  <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
+
+
+
+</Card>
+
+
+
+
+        </Grid>
+      );
+    }
+    )}
           
         <Divider />
        <Grid item xs={12} sm={12} md={12} mb={1} >

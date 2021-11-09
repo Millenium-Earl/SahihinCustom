@@ -1,45 +1,17 @@
+import { Grid } from '@mui/material';
+import { grid } from '@mui/system';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from 'react-router-dom';
 import { UAParser } from 'ua-parser-js';
-import PrayerCard from './CarousselItems/CarousselItem'
-import { Link } from "react-router-dom";
-import { Grid } from '@mui/material';
-import {FiChevronRight} from 'react-icons/fi'
-import Fab from '@mui/material/Fab';
+import Card from './CarousselItems/CarousselItem'
 import '../Styles/Carrousel.css';
-
-
 
 
 const ua = new UAParser()
 
-
-
-
-{/* <FiChevronRight onClick={() => onClick()} sx={{fontSize:'70px'}} />; */}
-
-
-
 export default function Carrousel (props) {
-  const DummyData = [...new Array(10)];
-  const filled = () => {
-    for(var i = 0; i < DummyData.length; i++){
-      DummyData[i] = i;
-    }
-
-  }
-  const CustomRightArrow = ({ onClick, ...rest }) => {
-    const {
-      onMove,
-      carouselState: { currentSlide, deviceType }
-    } = rest;
-    // onMove means if dragging or swiping in progress.
-    return (
-      <button onClick={() => onClick()} > ewo </button>
-  )
-
-    };
-const {PrayerCards, loading} = props
+const {Fatawis, loading} = props
 const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -57,19 +29,22 @@ const responsive = {
       slidesToSlide: 0 // optional, default to 1.
     }
   };
+  const DummyData = [...new Array(10)];
+  const filled = () => {
+    for(var i = 0; i < DummyData.length; i++){
+      DummyData[i] = i;
+    }
+  }
   return (
-    <Grid container className={'ElContainerCarousselCards'} spacing={5} paddingLeft={{xs:3,sm:10, md:10}} paddingRight={{xs:3,sm:10, md:10}} height={'70%'} >
-      
-    {filled()}
-    {console.log(PrayerCards)}
-    <Grid item xs={12} md={12} sm={12}>
+   <Grid container spacing={5} paddingLeft={{xs:3,sm:10, md:10}} paddingRight={{xs:3,sm:10, md:10}} height={'80%'}>
+     <Grid item xs={12} sm={12} md={12}>
      <div style={{border : "3px solid rgba(0,0,0,0.4)", borderRadius: '20px', marginTop:'40px'}}>
+   {filled()}
   <Carousel
     swipeable={true}
     draggable={true}
     showDots={true}
     responsive={responsive}
-    
     autoPlay={false}
     autoPlaySpeed={5000}
     keyBoardControl={true}
@@ -81,14 +56,14 @@ const responsive = {
     dotListClass="custom-dot-list-style"
     itemClass="carousel-item-padding-40-px"
   >
-    {PrayerCards.slice(-6)
+        {DummyData.slice(-6)
             .map(
-              (item,index) => <Link to={`/AllCards/${item.id}`}> <PrayerCard name={item.title} picture={item.picture} slug={item.slug} loading={loading} /> </Link>,
+              (item,index) =>  <Card name={item.title} picture={item.picture} slug={item.slug} loading={loading} /> 
             )}
+
         
   </Carousel>
   </div>
-  
   </Grid>
   </Grid>
   )

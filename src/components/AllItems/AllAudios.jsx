@@ -67,6 +67,7 @@ export default function AllAudios(props) {
   const [search, setSearch] = React.useState("");
   
   
+  const DummyData = [...new Array(20)];
 
   //const DummyData = [...new Array(80)];
   const itemsPerPage = 8;
@@ -85,15 +86,23 @@ export default function AllAudios(props) {
   
   }
   
+  const filled = () => {
+    for(var i = 0; i < DummyData.length; i++){
+      DummyData[i] = i;
+    }
 
+  }
   useEffect(() => {
     getAudios();
     
   }, [])
   
+
+
+  
   return (
       <>
-          
+          {filled()}
     <Paper
       sx={{
         width: "100vw",
@@ -116,11 +125,9 @@ export default function AllAudios(props) {
       >
         {/* Research input */}
 
-        <Grid item xs={6} sm={6} md={6}>
-
-        </Grid>
+        
        
-        <Grid item xs={6} sm={6} md={6}>
+        <Grid item xs={12} sm={12} md={12} sx={{display :'flex', justifyContent:{xs : 'space-around',sm:'flex-end', md:'flex-end'},marginRight : {xs: 0, sm:7, md:9}, paddingTop:'2vh', paddingBottom:'2vh'}}>
           <Typography  variant="h2" color="white"> الصوتيات</Typography>
           </Grid>
       </Grid>
@@ -129,8 +136,8 @@ export default function AllAudios(props) {
       <SearchComponent searchItem ={searchItem} CategoryText={'القسم'}/>
 
                       {/* Videos Grid */}
-      <Grid container spacing={3} >
-        {Audios.filter((item) => {
+      <Grid container spacing={3} padding={{xs:4, sm:6,md:8}} >
+        {loading===false? (Audios.filter((item) => {
                   if (search === "") {
                     return item;
                   } else if (
@@ -147,7 +154,7 @@ export default function AllAudios(props) {
       <CardHeader
         
         title={
-          loading===true ? (
+          loading?(
             <Skeleton
               animation="wave"
               height={10}
@@ -161,7 +168,7 @@ export default function AllAudios(props) {
           )
         }
         subheader={
-          loading===true ? (
+          loading? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
             
@@ -170,7 +177,7 @@ export default function AllAudios(props) {
           )
         }
       />
-      {loading===true ? (
+      {loading? (
         <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
       ) : (
         <CardMedia
@@ -190,7 +197,48 @@ export default function AllAudios(props) {
               </Grid>
             );
           }
-          )}
+          )) : 
+          
+          
+          (DummyData.slice((page - 1) * itemsPerPage, page * itemsPerPage).map(
+    (item, index) => {
+      return (
+        <Grid item xs={12} sm={6} md={4} >
+              
+          <Card sx={{ Width: '100%',  m: 3, height: 'auto'}}>
+<CardHeader
+  
+  title={
+    
+      <Skeleton
+        animation="wave"
+        height={10}
+        width="100%"
+        style={{ marginBottom: 6 }}
+      />
+    
+  }
+  subheader={
+   
+      <Skeleton animation="wave" height={10} width="40%" />
+    
+  }
+/>
+{
+   <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
+  
+}
+
+
+</Card>
+
+
+
+
+        </Grid>
+      );
+    }
+    ))}
           
         <Divider />
        <Grid item xs={12} sm={12} md={12} mb={1} >

@@ -42,7 +42,13 @@ let theme = createTheme();
   })
 
   const CssTextField = styled(TextField)({
+
+
+    "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input" :{
+      padding: 9,
+    },
     backgroundColor: "white",
+    
     [breakpointz.up('md')] :{ 
         width :'20vw',
         height:'4vh'
@@ -60,7 +66,7 @@ let theme = createTheme();
         
   
     marginLeft: 10,
-    paddingBottom :"40px",
+    paddingBottom :"39px",
     
     "& .MuiInput-underline:after": {
       borderBottomColor: "yellow",
@@ -163,17 +169,16 @@ const handleChangeCat = (event) => {
           SelectProps={{
             native: true,
           }}
-          sx={{backgroundColor:'white', 
-          
+          sx={{
             height :'4vh',
             "& .MuiSelect-root" : {
-              
             height :'4vh',
-            "& .MuiSelect-select" :{padding : 0}
+            backgroundColor:'white', 
+            
+            "& .css-1e09ahn-MuiNativeSelect-select-MuiInputBase-input-MuiFilledInput-input" : {paddingTop : 1,paddingRight :6}
             
         },
-        "& .css-1e09ahn-MuiNativeSelect-select-MuiInputBase-input-MuiFilledInput-input" : {paddingTop : 1}
-      }}
+      "& .MuiSelect-outlined" :{height:"3vh"}}}
         >
           {newCats.map((option,index) => (
             <option key={option.value} value={option.value}>
@@ -203,7 +208,8 @@ const handleChangeCat = (event) => {
             "& .MuiSelect-root" : {
             height :'4vh',
             backgroundColor:'white', 
-            "& .css-1e09ahn-MuiNativeSelect-select-MuiInputBase-input-MuiFilledInput-input" : {paddingTop : 1}
+            
+            "& .css-1e09ahn-MuiNativeSelect-select-MuiInputBase-input-MuiFilledInput-input" : {paddingTop : 1,paddingRight :6}
             
         },
       "& .MuiSelect-outlined" :{height:"3vh"}}}
@@ -235,7 +241,7 @@ const handleChangeCat = (event) => {
               "& .MuiSelect-root" : {
               height :'4vh',
               backgroundColor:'white', 
-              "& .css-1e09ahn-MuiNativeSelect-select-MuiInputBase-input-MuiFilledInput-input" : {paddingTop : 1}
+              "& .css-1e09ahn-MuiNativeSelect-select-MuiInputBase-input-MuiFilledInput-input" : {paddingTop : 1,paddingRight :6}
               
           },
         "& .MuiSelect-outlined" :{height:"3vh"}}}

@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import {AiFillCaretDown} from 'react-icons/ai'
 
 import { Link } from 'react-router-dom';
+import { Skeleton } from '@mui/material';
 
 
 
@@ -18,7 +19,7 @@ import { Link } from 'react-router-dom';
   export default function Footer(props) {
     
    
-    const {title, link, name} = props
+    const {link, name, loading} = props
 
 
 
@@ -36,7 +37,7 @@ import { Link } from 'react-router-dom';
                       
 
      <Grid dir={'rtl'} item xs={12} sm={12} md={12} sx={{alignItems:'flex-start', marginLeft:'0%'}}>
-     <Link to={`/${link}/`}>   <Typography variant="h4" color={"white"} sx={{padding:'4px'}}>  {name}  </Typography></Link>
+       {loading===false? (<Link to={`/${link}/`}>   <Typography variant="h4" color={"white"} sx={{padding:'4px'}}>  {name}  </Typography> </Link> ) : (  <Typography variant="h4"> <Skeleton animation='wave' height='3vh' width='100%' variant='text' > </Skeleton>  </Typography> ) }
                       
                             </Grid> 
 

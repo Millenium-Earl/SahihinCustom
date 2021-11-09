@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {  CardActionArea, CardActions } from '@mui/material';
+import {  CardActionArea, CardActions, CardHeader, Skeleton } from '@mui/material';
 import {makeStyles}from '@mui/styles'
 import createBreakpoints from '@mui/system/createTheme/createBreakpoints'
 import Ticker from 'react-ticker'
@@ -85,17 +85,18 @@ export default function MultiActionAreaCard(props) {
 
   
   
-    const {name, picture, slug, cover, thumbnail} = props;
+    const {name, picture, slug, cover, thumbnail, loading} = props;
     const classes = useStyles()
     
-  return (
+  return ( <>
+    {loading===false?(
     <Card className={classes.card} sx={{borderRadius:10, "& .MuiPaper-root" :{opacity :'4%'}}}>
       <CardActionArea className={classes.action}>
         <CardMedia 
           component="img"
           height="100%"
           image={picture ? picture : cover? cover : thumbnail}
-          alt="sad cat"
+          alt="carrousel item"
         />
         <CardContent  raised='true' className={classes.content}>
             
@@ -119,6 +120,18 @@ export default function MultiActionAreaCard(props) {
       <CardActions>
       
       </CardActions>
-    </Card>
+    </Card>) :
+
+<Card className={classes.card} sx={{borderRadius:10, "& .MuiPaper-root" :{opacity :'4%'}}}>
+
+<CardMedia height='100%'>
+  <Skeleton sx={{ height: 190, backgroundColor:'grey' }} animation="pulse" variant="rectangular" />
+</CardMedia>
+ 
+
+</Card>
+    
+    }
+    </>
   );
 }

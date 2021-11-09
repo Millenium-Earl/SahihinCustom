@@ -4,6 +4,8 @@ import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
 import { UAParser } from 'ua-parser-js';
 import BookCard from './CarousselItems/CarousselItem'
+import '../Styles/Carrousel.css';
+
 
 
 const ua = new UAParser()

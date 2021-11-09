@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
-import {  Drawer, InputBase } from "@mui/material";
+import {  Drawer, InputBase, Paper } from "@mui/material";
 import MainTitle from "./MainTitle";
 
 
@@ -60,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   padding :'3px',
   
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: 3,
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -80,6 +80,15 @@ const Item = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   
 }));
+const ItemSide = styled(Paper)(({ theme }) => ({
+  margin : 0,
+  paddingTop: theme.spacing(2),
+  paddingBottom : theme.spacing(2),
+  textAlign: 'center',
+ 
+  
+}));
+
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -132,19 +141,19 @@ export default function HideAppBar(props) {
 
     <Stack
       direction={"column"}
-      divider={<Divider orientation="vertical" flexItem sx={{border: "3px solid rgba(0,0,0,.1)", backgroundColor:'white', }} />}
+      divider={<Divider orientation="vertical" flexItem sx={{border: "1px solid rgba(0,0,0,1)", backgroundColor:'white', opacity:'20%' }} />}
       spacing={3}
       dir='rtl'
     >
-      <Link to='/' > <Typography variant="h4"  sx={{color:'white'}} > <Item> الصفحة الرّئيسيّة</Item> </Typography> </Link>
-    <Link to='/AllCards' > <Typography variant="h4" sx={{color:'white'}} > <Item> البطاقات الدعويّة</Item> </Typography> </Link>
-     <Link to='/AllBooks'>  <Typography variant="h4" sx={{color:'white'}}  > <Item>كتب السنّة </Item> </Typography> </Link>
-    <Link to='/AllAudios'>  <Typography variant="h4" sx={{color:'white'}}  > <Item>الصوتيات</Item> </Typography> </Link>
-     <Link to='/AllVideos'> <Typography variant="h4"  sx={{color:'white'}} > <Item>المرئيات</Item> </Typography> </Link>
-      <Link to='/AllFatawis'> <Typography variant="h4"  sx={{color:'white'}} > <Item>فتـــــــاوى</Item> </Typography> </Link>
+      <Link to='/' > <Typography variant="h4"  sx={{color:'white'}} > <ItemSide> الصفحة الرّئيسيّة</ItemSide> </Typography> </Link>
+    <Link to='/AllCards' > <Typography variant="h4" sx={{color:'white'}} > <ItemSide> البطاقات الدعويّة</ItemSide> </Typography> </Link>
+     <Link to='/AllBooks'>  <Typography variant="h4" sx={{color:'white'}}  > <ItemSide>كتب السنّة </ItemSide> </Typography> </Link>
+    <Link to='/AllAudios'>  <Typography variant="h4" sx={{color:'white'}}  > <ItemSide>الصوتيات</ItemSide> </Typography> </Link>
+     <Link to='/AllVideos'> <Typography variant="h4"  sx={{color:'white'}} > <ItemSide>المرئيات</ItemSide> </Typography> </Link>
+      <Link to='/AllFatawis'> <Typography variant="h4"  sx={{color:'white'}} > <ItemSide>فتـــــــاوى</ItemSide> </Typography> </Link>
      <Item> 
        <Typography  dir={'ltr'} color={'white'}>  <CgPhone  style={{color:'orange', }} /> +90 531 764 39 23 </Typography>
-     <Typography dir={'ltr'} color={'white'}> <BsFillEnvelopeFill   style={{ fill : 'yellow'}}/> safhatalssahihin@info.com </Typography>
+     <Typography dir={'ltr'} color={'white'}> <BsFillEnvelopeFill   style={{ fill : 'yellow'}}/> <a style={{color:'white'}} href='mailto:safhatalssahihin@info.com'> safhatalssahihin@info.com </a> </Typography>
      </Item>
 
       
@@ -185,7 +194,7 @@ export default function HideAppBar(props) {
 
                   <Grid item  md={5} lg={5}>
 
-           <Typography variant='h5' sx={{fontFamily:'Ebrima'}}> <BsFillEnvelopeFill style={{ fill : 'yellow', fontSize:'2vw'}}/> safhatalssahihin@info.com </Typography>
+           <Typography variant='h5' sx={{fontFamily:'Ebrima', color:'white'}}> <BsFillEnvelopeFill style={{ fill : 'yellow', fontSize:'2vw'}}/> <a style={{color:'white'}} href='mailto:safhatalssahihin@info.com'> safhatalssahihin@info.com </a> </Typography>
                 </Grid>
                 <Grid item  md={3} lg={3}>
 

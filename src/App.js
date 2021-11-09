@@ -7,7 +7,7 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import Footer from "./components/Footer";
 import ScrollToTop from './components/ScrollToTop'
-
+import NotFound from "./components/NotFound";
 import GridContent from "./components/GridContent";
 import DateComponent from "./components/DateComponent";
 import AllPrayerCards from "./components/AllItems/AllPrayerCards";
@@ -32,7 +32,7 @@ function App() {
   const [Books, setBooks] = useState([]);
   const [Fatawis, setFatawis] = useState([]);
   const [Videos, setVideos] = useState([]);
-
+  
 
   const [loading, setLoading] = useState(true);
 
@@ -60,8 +60,6 @@ function App() {
         params: JSON.stringify({}),
       })
       .then(function (response) {
-        console.log(response);
-
         setAudios([...response.data]);
         setLoading(false)
         
@@ -155,7 +153,7 @@ function App() {
           </Route>
           <Route path="/AllCards/:id" component={PrayerCardDetails} />
           <Route path="/AllAudios" exact>
-            <AllAudios Audios={Audios} getAudios={getAudios} />
+            <AllAudios Audios={Audios} getAudios={getAudios} loading={loading} />
           </Route>
           <Route path="/AllAudios/:id" component={AudioDetailsTest} />
            
@@ -176,7 +174,9 @@ function App() {
             <AllVideos loading={loading} Videos={Videos} getVideos={getVideos} />
           </Route>
           <Route path="/AllVideos/:id" component={VideoDetails} />
-           
+          <Route component={NotFound} />
+    
+
         </Switch>
         </ScrollToTop>
         <Footer />

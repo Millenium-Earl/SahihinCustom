@@ -5,12 +5,14 @@ import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
 import { UAParser } from 'ua-parser-js';
 import FatawiCard from './CarousselItems/CarousselItem'
+import '../Styles/Carrousel.css';
+
 
 
 const ua = new UAParser()
 
 export default function Carrousel (props) {
-const {Fatawis} = props
+const {Fatawis, loading} = props
 const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -28,11 +30,17 @@ const responsive = {
       slidesToSlide: 0 // optional, default to 1.
     }
   };
+  const DummyData = [...new Array(10)];
+  const filled = () => {
+    for(var i = 0; i < DummyData.length; i++){
+      DummyData[i] = i;
+    }
+  }
   return (
    <Grid container spacing={5} paddingLeft={{xs:3,sm:10, md:10}} paddingRight={{xs:3,sm:10, md:10}} height={'80%'}>
      <Grid item xs={12} sm={12} md={12}>
      <div style={{border : "3px solid rgba(0,0,0,0.4)", borderRadius: '20px', marginTop:'40px'}}>
-   
+   {filled()}
   <Carousel
     swipeable={true}
     draggable={true}
@@ -49,10 +57,11 @@ const responsive = {
     dotListClass="custom-dot-list-style"
     itemClass="carousel-item-padding-40-px"
   >
-    {Fatawis.slice(-6)
+        {Fatawis.slice(-6)
             .map(
-              (item,index) => <Link to={`/AllFatawis/${item.id}`}> <FatawiCard name={item.title} picture={item.picture} slug={item.slug} /> </Link>,
+              (item,index) => <Link to={`/AllCards/${item.id}`}> <FatawiCard name={item.title} picture={item.picture} slug={item.slug} loading={loading} /> </Link>,
             )}
+
         
   </Carousel>
   </div>
